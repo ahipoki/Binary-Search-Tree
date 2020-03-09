@@ -60,3 +60,11 @@ void heapDown(int heap[], int len, int in){
     heapDown(heap, len, largest);
   }
 }
+
+void heapify(int heap[], int len){
+  int parent = len/2;
+  if (heap[len] > heap[parent] && len > 0){
+    swap(heap[len], heap[parent]);
+    heapify(heap, parent);
+  }
+}
