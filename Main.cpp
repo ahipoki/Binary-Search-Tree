@@ -45,6 +45,21 @@ int Main()
       cout<<"That's an invalid option"<<endl;
     }
   }
+  char* list = strtok(line, " ");
+  int heap[100];
+  int len = 0;
+  while (list){
+    heap[len];
+    heapify(heap, len);
+    list = strtok(NULL, " ");
+    len++;
+  }
+  cout<<"Visual Representation:"<<endl;
+  printTree(heap, len, 0, 0);
+  cout<<"Max to min:"<<endl;
+  sort(heap, len);
+  cout<<endl;
+  return 0;
 }
 
 void strupper(char* str){
