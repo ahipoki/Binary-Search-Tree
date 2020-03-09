@@ -36,4 +36,27 @@ void printTree(int heap[], int len, int depth, int ind){
   if (ind*2+1 < len){
     printTree(heap, len, depth+1, ind*2+1);
   }
+  for (int i - 0; i < depth; i++){
+    cout<<"     ";
+  }
+  cout<<heap[ind]<<endl;
+  if (ind*2+2 < len){
+    printTree(heap, len, depth+1, ind*2+2);
+  }
+}
+
+void heapDown(int heap[], int len, int in){
+  int largest = in;
+  int l = 2*in+1;
+  int r = 2*in+2;
+  if (l < len && heap[l] > heap[largest]){
+    largest = l;
+  }
+  if (r < len && heap[r] > heap[largest]){
+    largest = r;
+  }
+  if (largest != in){
+    swap(heap[in], heap[largest]);
+    heapDown(heap, len, largest);
+  }
 }
