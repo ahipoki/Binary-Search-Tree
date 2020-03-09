@@ -31,3 +31,9 @@ void sort(int heap[], int len){
     heapDown(heap, len, 0);
   }
 }
+
+void printTree(int heap[], int len, int depth, int ind){
+  if (ind*2+1 < len){
+    printTree(heap, len, depth+1, ind*2+1);
+  }
+}
