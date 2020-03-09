@@ -11,7 +11,40 @@ void heapDown(int[], int, int);
 
 int Main()
 {
-  cout<<"Binary Search Tree"<<endl;
+  char input[80];
+  char line[100];
+  bool type = false;
+  while (type == false){
+    cout<<"Do you want to use input or a file?"<<endl;
+    cin.getline(input, 80);
+    strupper(input);
+    if (strcmp(input, "INPUT") == 0){
+      type = true;
+      cout<<"Please enter a list of numbers between 1 and 1000 separated by spaces"<<endl;
+      cin.get(line, 100);
+      cin.clear();
+      cin.ignore(999, '\n');
+    }
+    else if (strcmp(input, "FILE") == 0){
+      char fileName[100];
+      cout<<"Enter a file name"<<endl;
+      cin.getline(fileName, sizeof(fileName));
+      ifstream fileStream;
+      fileStream.open(fileName);
+      if (fileStream){
+        fileStream.getline(line, sizeof(line));
+      }
+      else{
+        cout<<"Couldn't find that file"<<endl;
+        return 0;
+      }
+      fileStream.close();
+      type = true;
+    }
+    else{
+      cout<<"That's an invalid option"<<endl;
+    }
+  }
 }
 
 void strupper(char* str){
