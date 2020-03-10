@@ -7,8 +7,11 @@
 using namespace std;
 
 class Node{
-  Node();
-  ~Node();
-  void setNext(Node*);
-  Node* getNext();
-}
+  public:
+   Node();
+   ~Node();
+   void setNext(Node*);
+   Node* getNext();
+  private:
+};
+#endif
