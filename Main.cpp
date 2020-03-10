@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <cmath>
+#include <cstdlib>
 #include "Node.h"
 
 using namespace std;
@@ -15,8 +17,10 @@ int main()
 {
   char input[80];
   char line[100];
-  int counter = 0;
-  int lineCounter = 0;
+  int size = sizeof(line)/sizeof(line[0]);
+  //int counter = 0;
+  //int lineCounter = 0;
+  bool running = true;
   bool type = false;
   while (type == false){
     cout<<"Do you want to use input or a file?"<<endl;
@@ -26,15 +30,14 @@ int main()
       type = true;
       cout<<"Please enter a list of numbers between 1 and 1000 separated by spaces"<<endl;
       cin.get(line, 100);
-      lineCounter = 
-      for (int i = 0; i < line; i++){
-	if (line[i] > 1000){
-	  cout<<"You can't have numbers larger than 1000"<<endl;
-	}
-	else if (line[i] <= 1000){
-	  counter++;
-	}
-      }
+      //for (int i = 0; i < size; i++){
+      //if (line[i] > 1000){
+      //cout<<"You can't have numbers larger than 1000"<<endl;
+      //}
+      //else if (line[i] <= 1000){
+      //counter++;
+      //}
+      //}
       cin.clear();
       cin.ignore(999, '\n');
     }
@@ -45,11 +48,11 @@ int main()
       ifstream fileStream;
       fileStream.open(fileName);
       if (fileStream){
-        fileStream.getline(line, sizeof(line));
+	fileStream.getline(line, sizeof(line));
       }
       else{
-        cout<<"Couldn't find that file"<<endl;
-        return 0;
+	cout<<"Couldn't find that file"<<endl;
+	return 0;
       }
       fileStream.close();
       type = true;
@@ -62,16 +65,51 @@ int main()
   int heap[100];
   int len = 0;
   while (list){
-    heap[len];
+    heap[len] = atoi(list);
     heapify(heap, len);
     list = strtok(NULL, " ");
     len++;
   }
-  cout<<"Visual Representation:"<<endl;
-  printTree(heap, len, 0, 0);
-  cout<<"Max to min:"<<endl;
-  sort(heap, len);
-  cout<<endl;
+  while (running == true){
+    char move[80];
+    cout<<"Do you want to add a node, remove a node, print out the tree, search for a number in the tree, or stop?"<<endl;
+    cin.getline(move, 80);
+    strupper(move);
+    if (strcmp(move, "ADD") == 0){
+      int numAdd = 0;
+      cout<<"What is the number you want to add to the tree?"<<endl;
+      cin>>numAdd;
+      cin.clear();
+      cin.ignore(999, '\n');
+    }
+    else if (strcmp(move, "REMOVE") == 0){
+      int numRemove = 0;
+      cout<<"What is the number you want to remove?"<<endl;
+      cin>>numRemove;
+      cin.clear();
+      cin.ignore(999, '\n');
+    }
+    else if (strcmp(move, "PRINT") == 0){
+      cout<<"Visual Representation:"<<endl;
+      printTree(heap, len, 0, 0);
+      cout<<"Max to min:"<<endl;
+      sort(heap, len);
+      cout<<endl;
+    }
+    else if (strcmp(move, "SEARCH") == 0){
+      int numSearch = 0;
+      cout<<"Enter a number to search the tree for"<<endl;
+      cin>>numSearch;
+      cin.clear();
+      cin.ignore(999, '\n');
+    }
+    else if (strcmp(move, "STOP") == 0){
+      running = false;
+    }
+    else{
+      cout<<"That's an invalid option"<<endl;
+    }
+  }
   return 0;
 }
 
