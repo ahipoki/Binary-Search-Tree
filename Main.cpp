@@ -17,8 +17,9 @@ int main()
 {
   char input[80];
   char line[100];
-  int size = sizeof(line)/sizeof(line[0]);
-  //int counter = 0;
+  //int size = sizeof(line)/sizeof(line[0]);
+  int size = 0;
+  int counter = 0;
   //int lineCounter = 0;
   bool running = true;
   bool type = false;
@@ -30,14 +31,18 @@ int main()
       type = true;
       cout<<"Please enter a list of numbers between 1 and 1000 separated by spaces"<<endl;
       cin.get(line, 100);
-      //for (int i = 0; i < size; i++){
-      //if (line[i] > 1000){
-      //cout<<"You can't have numbers larger than 1000"<<endl;
-      //}
-      //else if (line[i] <= 1000){
-      //counter++;
-      //}
-      //}
+      size = sizeof(line)/sizeof(line[0]);
+      for (int i = 0; i < size; i++){
+	if (line[i] > 1000){
+	  cout<<"You can't have numbers larger than 1000"<<endl;
+	}
+	else if (line[i] <= 1000){
+	counter++;
+	}
+      }
+      if (counter < size){
+	cout<<"Repick your numbers"<<endl;
+      }
       cin.clear();
       cin.ignore(999, '\n');
     }
