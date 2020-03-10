@@ -84,7 +84,7 @@ void printTree(int heap[], int len, int depth, int ind){
   if (ind*2+1 < len){
     printTree(heap, len, depth+1, ind*2+1);
   }
-  for (int i = 0; i < depth; i++){
+  for (int i - 0; i < depth; i++){
     cout<<"     ";
   }
   cout<<heap[ind]<<endl;
