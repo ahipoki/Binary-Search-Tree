@@ -15,8 +15,6 @@ int main()
 {
   char input[80];
   char line[100];
-  int counter = 0;
-  int lineCounter = 0;
   bool type = false;
   while (type == false){
     cout<<"Do you want to use input or a file?"<<endl;
@@ -26,15 +24,6 @@ int main()
       type = true;
       cout<<"Please enter a list of numbers between 1 and 1000 separated by spaces"<<endl;
       cin.get(line, 100);
-      lineCounter = 
-      for (int i = 0; i < line; i++){
-	if (line[i] > 1000){
-	  cout<<"You can't have numbers larger than 1000"<<endl;
-	}
-	else if (line[i] <= 1000){
-	  counter++;
-	}
-      }
       cin.clear();
       cin.ignore(999, '\n');
     }
