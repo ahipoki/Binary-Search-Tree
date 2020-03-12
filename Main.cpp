@@ -86,6 +86,7 @@ int main()
       cin>>numAdd;
       cin.clear();
       cin.ignore(999, '\n');
+      cout<<"You want to add: "<<numAdd<<endl;
     }
     else if (strcmp(move, "REMOVE") == 0){
       int numRemove = 0;
@@ -93,6 +94,7 @@ int main()
       cin>>numRemove;
       cin.clear();
       cin.ignore(999, '\n');
+      cout<<"You want to remove: "<<numRemove<<endl;
     }
     else if (strcmp(move, "PRINT") == 0){
       cout<<"Visual Representation:"<<endl;
@@ -107,6 +109,7 @@ int main()
       cin>>numSearch;
       cin.clear();
       cin.ignore(999, '\n');
+      cout<<"You want to search for: "<<numSearch<<endl;
     }
     else if (strcmp(move, "STOP") == 0){
       running = false;
