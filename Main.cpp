@@ -77,7 +77,7 @@ int main()
   }
   while (running == true){
     char move[80];
-    cout<<"Do you want to add a node, remove a node, print out the tree, search for a number in the tree, or stop?"<<endl;
+    cout<<"Do you want to add a node, remove a node, print out the tree, search for a number in the tree, or stop the program?"<<endl;
     cin.getline(move, 80);
     strupper(move);
     if (strcmp(move, "ADD") == 0){
