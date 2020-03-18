@@ -18,9 +18,9 @@ class Node{
    void setRight(Node*);
    Node* getRight();
   private:
-   Node* next;
    Node* right;
    Node* left;
-   char* value;
+   Node* parent;
+   int key;
 };
 #endif
