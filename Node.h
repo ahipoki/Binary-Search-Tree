@@ -10,9 +10,8 @@ class Node{
   public:
    Node(char*);
    ~Node();
-   char* getValue();
-   void setNext(Node*);
-   Node* getNext();
+   void setKey(char*);
+   char* getKey();
    void setLeft(Node*);
    Node* getLeft();
    void setRight(Node*);
