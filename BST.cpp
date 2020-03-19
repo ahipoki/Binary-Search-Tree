@@ -21,3 +21,11 @@ Node* BST::Insert(Node* node, int key){
   }
   return node;
 }
+
+void BST::PrintTreeInOrder(Node* node){
+  if (node == NULL){
+    return;
+  }
+  PrintTreeInOrder(node->Left);
+  cout<<Key->Right;
+}
