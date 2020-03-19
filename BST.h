@@ -11,10 +11,6 @@ class BST{
     Node* Insert(Node*, int);
     void PrintTreeInOrder(Node*);
     Node* Search(Node*, int);
-    int FindMin(Node*);
-    int FindMax(Node*);
-    int Successor(Node*);
-    int Predecessor(Node*);
     Node* Remove(Node*, int);
   private:
     int Key;
