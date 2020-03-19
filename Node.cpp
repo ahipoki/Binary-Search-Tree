@@ -4,9 +4,8 @@
 
 using namespace std;
 
-Node::Node(int newKey){
-  Key = new char[strlen(newKey)+1];
-  strcpy(Key, newKey);
+Node::Node(){
+  Key = NULL;
   Right = NULL;
   Left = NULL;
   Parent = NULL;
