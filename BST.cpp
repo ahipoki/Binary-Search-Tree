@@ -12,7 +12,7 @@ Node* BST::Insert(Node* node, int key){
     node->Right = NULL;
     node->Parent = NULL;
   }
-  else if (node->Key->Right = Insert(node->Right, key){
+  else if (node->Key->Right = Insert(node->Right, key)){
     node->Right->Parent = node;
   }
   else{
