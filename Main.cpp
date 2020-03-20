@@ -8,10 +8,10 @@
 using namespace std;
 
 void strupper(char* str);
-void sort(int[], int);
-void printTree(int[], int, int, int);
-void heapify(int[], int);
-void heapDown(int[], int, int);
+void Insert(BST*);
+void deleteNode(BST*);
+void print(BST*);
+void search(BST*);
 
 int main()
 {
@@ -62,7 +62,7 @@ int main()
   }
   while (running == true){
     char move[80];
-    cout<<"Do you want to add a node, remove a node, print out the tree, search for a number in the tree, or stop the program?"<<endl;
+    cout<<"Do you want to add a node, remove a node, print out the tree, search for a number in the tree, or quit the program?"<<endl;
     cin.getline(move, 80);
     strupper(move);
     if (strcmp(move, "ADD") == 0){
@@ -101,7 +101,7 @@ int main()
         cout<<numSearch<<" is not in the tree"<<endl;
       }
     }
-    else if (strcmp(move, "STOP") == 0){
+    else if (strcmp(move, "QUIT") == 0){
       running = false;
     }
     else{
