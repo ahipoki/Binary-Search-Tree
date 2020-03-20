@@ -8,10 +8,11 @@ using namespace std;
 class BST{
   public:
     BST();
-    Node* Insert(Node*, int);
-    void PrintTreeInOrder(Node*);
-    Node* Search(Node*, int);
-    Node* Remove(Node*, int);
+    void Insert(int);
+    void PrintTreeInOrder();
+    bool Search(int);
+    void Delete(int);
+    ~BST();
   private:
     int Key;
     Node* Left;
