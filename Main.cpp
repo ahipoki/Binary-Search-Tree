@@ -136,6 +136,10 @@ void deleteNode(BST* bst){
   bst->deleteNode(key);
 }
 
+void print(BST* bst){
+  bst->PrintTreeInOrder();
+}
+
 void search(BST* bst){
   int key;
   cout<<"What number do you want to search the tree for?"<<endl;
@@ -149,4 +153,3 @@ void search(BST* bst){
     cout<<n<<" is not in the tree"<<endl;
   }
 }
-
