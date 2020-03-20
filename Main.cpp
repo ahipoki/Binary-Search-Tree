@@ -8,6 +8,7 @@
 using namespace std;
 
 void strupper(char* str);
+int strToInt(char* str);
 void Insert(BST*);
 void deleteNode(BST*);
 void print(BST*);
@@ -116,6 +117,18 @@ void strupper(char* str){
   for (int i = 0; i < len; i++){
     str[i] = toupper(str[i]);
   }
+}
+
+int strToInt(char* str){
+  int num = 0;
+  for (int i = 0; i < strlen(str); i++){
+    if (!isdigit(str[i])){
+      continue;
+    }
+    num *= 10;
+    num += str[i] - '0';
+  }
+  return num;
 }
 
 void Insert(BST* bst){
