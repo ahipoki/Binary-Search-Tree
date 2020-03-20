@@ -52,14 +52,22 @@ int main()
       cout<<"That's an invalid option"<<endl;
     }
   }
-  char* list = strtok(line, " ");
-  int heap[100];
-  int len = 0;
-  while (list){
-    heap[len] = atoi(list);
-    heapify(heap, len);
-    list = strtok(NULL, " ");
-    len++;
+  char* build = new char[strlen(line)+1]();
+  int ind = 0;
+  for (int i = 0; i < strlen(line); i++) {
+    if (line[i] == ' ') {
+      if (strlen(build) > 0) {
+	    bst->Insert(strToInt(build));
+      }
+      build = new char[strlen(line)]();
+      ind = 0;
+    }
+    else {
+      if (isdigit(line[i])) build[ind++] = line[i];
+    }
+  }
+  if (strlen(build) > 0) {
+    bst->Insert(strToInt(build));
   }
   while (running == true){
     char move[80];
