@@ -55,19 +55,21 @@ int main()
   }
   char* build = new char[strlen(line)+1]();
   int ind = 0;
-  for (int i = 0; i < strlen(line); i++) {
-    if (line[i] == ' ') {
-      if (strlen(build) > 0) {
-	    bst->Insert(strToInt(build));
+  for (int i = 0; i < strlen(line); i++){
+    if (line[i] == ' '){
+      if (strlen(build) > 0){
+        bst->Insert(strToInt(build));
       }
       build = new char[strlen(line)]();
       ind = 0;
     }
-    else {
-      if (isdigit(line[i])) build[ind++] = line[i];
+    else{
+      if (isdigit(line[i])){
+        build[ind++] = line[i];
+      }
     }
   }
-  if (strlen(build) > 0) {
+  if (strlen(build) > 0){
     bst->Insert(strToInt(build));
   }
   while (running == true){
@@ -76,36 +78,16 @@ int main()
     cin.getline(move, 80);
     strupper(move);
     if (strcmp(move, "ADD") == 0){
-      int numAdd = 0;
-      cout<<"What is the number you want to add to the tree?"<<endl;
-      cin>>numAdd;
-      cin.clear();
-      cin.ignore(999, '\n');
-      bst->Insert(numAdd);
+      Insert(bst);
     }
     else if (strcmp(move, "REMOVE") == 0){
-      int numRemove = 0;
-      cout<<"What is the number you want to remove?"<<endl;
-      cin>>numRemove;
-      cin.clear();
-      cin.ignore(999, '\n');
-      bst->deleteNode(numRemove);
+      deleteNode(bst);
     }
     else if (strcmp(move, "PRINT") == 0){
         print(bst);
     }
     else if (strcmp(move, "SEARCH") == 0){
-      int numSearch = 0;
-      cout<<"Enter a number to search the tree for"<<endl;
-      cin>>numSearch;
-      cin.clear();
-      cin.ignore(999, '\n');
-      if (bst->search(numSearch)){
-	      cout<<numSearch<<" is in the tree"<<endl;
-      }
-      else{
-        cout<<numSearch<<" is not in the tree"<<endl;
-      }
+      search(bst);
     }
     else if (strcmp(move, "QUIT") == 0){
       running = false;
