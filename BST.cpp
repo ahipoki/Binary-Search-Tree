@@ -1,171 +1,210 @@
+#include <iostream>
 #include "BST.h"
 #include "Node.h"
-#include <iostream>
 
 using namespace std;
 
-//Constructor
-BST::BST() {
+BST::BST(){//Constructor
   head = NULL;
+  //Head node is NULL
 }
 
-//Public addNode function which calls private addNode function
-void BST::Insert(int n){
+void BST::Insert(int n){//Public insert function
   Insert(head, n);
-  cout << "Node added" << endl;
+  //Calls private insert function
 }
 
-//private addnode function
-void BST::Insert(Node* &h, int n) {
-  if (h == NULL) {          //If h is null then this was the head, and BST is empty
+void BST::Insert(Node* &h, int key){//Private insert function
+  if (h == NULL){//If head is null
     head = new Node(n);
+    //BST was empty & new head
     return;
   }
-  else if (n < h -> getKey()) { //If value to add is less than current node, then we need to go to the left
-    if (h -> getLeft() == NULL) { //if there is nothing to the left then add it
-      h -> setLeft(new Node(n));
-      h -> getLeft() -> setParent(h);
+  else if (key < h->getKey()){//If key is less than current node, go left
+    if (h->getLeft() == NULL){//If there's no node left
+      h->setLeft(new Node(key));
+      h->getLeft()->setParent(h);
+      //Add the new node
       return;
     }
-    Node* left = h -> getLeft();  //Otherwise call addnode again on the left node
-    Insert(left, n);
+    Node* left = h->getLeft();
+    Insert(left, key);
+    //Call insert on left side again
     return;
   }
-  else {                          //Otherwise we need to go to the right
-    if (h -> getRight() == NULL) {//If there is nothing on the right we add the node 
-      h -> setRight(new Node(n));
-      h -> getRight() -> setParent(h);
+  else{//Anything else go to right
+    if (h->getRight() == NULL){//If right side is empty
+      h->setRight(new Node(key));
+      h->getRight()->setParent(h);
+      //Add new node
       return;
     }
-    Node* right = h -> getRight();//Otherwise call addnode again on the right side
-    Insert(right, n);            
+    Node* right = h->getRight();
+    Insert(right, key);
+    //Call insert on right side again
     return;
   }
 }
 
-//public deletenode function
-void BST::deleteNode(int n) {
-  //Call private deletenode function, which returns true if it deletes and returns false otherwise
-  if(deleteNode(head, n)) cout << "Node deleted" << endl; 
+void BST::deleteNode(int n){//Public delete node function
+  if(deleteNode(head, n)){
+    cout<<"Node deleted"<<endl;
+  }
+  //Call private delete node function
 }
 
-//private deletenode function
-bool BST::deleteNode(Node* &h, int n) {
-  if (h == NULL) {               //We have not found the node, return false
-    cout << "Empty Tree or Node not found" << endl;
+bool BST::deleteNode(Node* &h, int n){//Private delete node function
+  if (h == NULL){//If the node wasn't found
+    cout<<"Empty tree or node not found"<<endl;
+    //Tell the user the tree is empty or the node was not found
     return false;
+    //Return false
   }
-  //Node to delete found
-  if (h -> getKey() == n) {    //We have found the node, now separate based on how many children
-    if (h -> getLeft() == NULL && h -> getRight() == NULL) { //0 children
-      if (h -> getParent() == NULL) { //If this is the root node, delete it, and set head to null
+  if (h->getKey() == n){//If the node was found
+    if (h->getLeft() == NULL && h->getRight() == NULL){//0 children
+      if (h->getParent() == NULL){//If it's the root node
 	Node* temp = h;
 	h = NULL;
 	delete temp;
 	return true;
+	//Delete the node and set the head to NULL
       }
-      if (h == h -> getParent() -> getLeft()) h -> getParent() -> setLeft(NULL); //Otherwise reconfigure parent's child pointer
-      else h -> getParent() -> setRight(NULL);
+      if (h == h->getParent()->getLeft()){
+        h->getParent()->setLeft(NULL);
+      }
+      //Fix parent's child pointer
+      else{
+        h->getParent()->setRight(NULL);
+      }
       delete h;
     }
-    else if (h -> getLeft() == NULL) { //right child
-      if (h -> getParent() == NULL) {  //if root node, just set this to the right node, and reconfigure parent pointer
+    else if (h->getLeft() == NULL){//Right child
+      if (h->getParent() == NULL){//If root node
 	Node* temp = h;
-	h = h -> getRight();
-	h -> setParent(NULL);
+	h = h->getRight();
+	h->setParent(NULL);
+	delete temp;
+	return true;
+	//Set to right node and fix parent pointer
+      }
+      Node* right = h->getRight();     
+      if (h == h->getParent()->getLeft()){//Point child pointer to new child
+	h->getParent()->setLeft(right);
+      }
+      else{
+        h->getParent()->setRight(right);
+      }
+      right->setParent(h->getParent());
+      delete h;
+      //Fix parent pointer
+    }
+    else if (h->getRight() == NULL) {//Left child, do the same as was done for right child
+      if (h->getParent() == NULL) {
+	Node* temp = h;
+	h = h->getLeft();
+	h->setParent(NULL);
 	delete temp;
 	return true;
       }
-      Node* right = h -> getRight();     
-      if (h == h -> getParent() -> getLeft()) h -> getParent() -> setLeft(right); //Point the parent's child pointer to new child
-      else h -> getParent() -> setRight(right);
-      right -> setParent(h -> getParent());                                       //Re set the parent pointer
+      Node* left = h->getLeft();
+      if (h == h->getParent()->getLeft()){//Point parent's child pointer to new child
+        h->getParent()->setLeft(left);
+      }
+      else h->getParent()->setRight(left);
+      left->setParent(h->getParent());
       delete h;
     }
-    else if (h -> getRight() == NULL) { //left child                  //same thing as the right child
-      if (h -> getParent() == NULL) {
-	Node* temp = h;
-	h = h -> getLeft();
-	h -> setParent(NULL);
-	delete temp;
-	return true;
+    else {//2 children
+      Node* temp = h->getRight();
+      while (temp->getLeft()) {
+	    temp = temp->getLeft();
       }
-      Node* left = h -> getLeft();
-      if (h == h -> getParent() -> getLeft()) h -> getParent() -> setLeft(left); //Point the parent's child pointer to new child
-      else h -> getParent() -> setRight(left);
-      left -> setParent(h -> getParent());
-      delete h;
-    }
-    else { //2 children
-      //Get inorder successor (only called on upper nodes, so don't need to deal with inorder succ. for leaves)
-      Node* temp = h -> getRight(); //Inorder successor for not-leaves is one right then as many left as possible
-      while (temp -> getLeft()) {
-	    temp = temp -> getLeft();
-      }
-
-      int key = temp -> getKey(); //Delete the inorder succ., then set the temps value to this
+      int key = temp->getKey();
       deleteNode(temp, key);
       
-      //Swap values as normal
-      h -> setKey(temp -> getKey()); //set the value of this node to inorder succ.
+      //Swap values
+      h->setKey(temp->getKey());
     }
-    return true; //We deleted it so return true
+    return true;
+    //Deleted so return true
   }
 
-  if (n < h -> getKey()) { //If value we are looking for is less than this value then go left
-    if (h -> getLeft() == NULL) { //If there is nothing to the left the value we are looking for doesn't exist
-      cout << "Node not found" << endl;
+  if (n < h->getKey()) {//If key is less than this go right
+    if (h->getLeft() == NULL) {//If nothing to left, key doesn't exist
+      cout<<"Node not found"<<endl;
+      //Node not found
       return false;
+      //Return false
     }
-    Node* t = h -> getLeft();
-    return deleteNode(t, n); //Call deletenode on left node
+    Node* t = h->getLeft();
+    return deleteNode(t, n);
+    //Delete node on left side
   }
-  else {                     //If value we are looking for is more than this value go right
-    if (h -> getRight() == NULL) { //Same as left
-      cout << "Node not found" << endl;
+  else {//If key is more, go right
+    if (h->getRight() == NULL) {//Same as left
+      cout<<"Node not found"<<endl;
       return false;
     }
-    Node* t = h -> getRight();
+    Node* t = h->getRight();
     return deleteNode(t, n);
   }
 }
 
-//public display function
-void BST::PrintTreeInOrder() {
-  PrintTreeInOrder(head, 0); //call private display function
+void BST::PrintTreeInOrder() {//Public print function
+  PrintTreeInOrder(head, 0);
+  //Call private print function
 }
 
-//private display function
-void BST::PrintTreeInOrder(Node* h, int d) { //inorder print of bst
-  if(!h) return; //empty tree
-  if (h -> getLeft()) PrintTreeInOrder(h->getLeft(), d+1);
-  for (int i = 0; i < d; i++) cout << "   ";
-  cout << h -> getKey() << endl;
-  if (h -> getRight()) PrintTreeInOrder(h -> getRight(), d+1);
+void BST::PrintTreeInOrder(Node* h, int d) {//Private print function
+  if(!h){//If tree is empty
+    return;
+  }
+  if (h->getLeft()){
+    PrintTreeInOrder(h->getLeft(), d+1);
+  }
+  for (int i = 0; i < d; i++){
+    cout<<"   ";
+  }
+  cout<<h->getKey()<<endl;
+  if (h->getRight()){
+    PrintTreeInOrder(h->getRight(), d+1);
+  }
 }
 
-//public search function
-bool BST::search(int n) {
+bool BST::search(int n) {//Public search function
   return search(head, n);
+  //Call private search function
 }
 
-//private recursive search function
-bool BST::search(Node* h, int n) {
-  if (!h) return false; //empty tree
-  if (h -> getKey() == n) return true; //Match
-  if (n < h -> getKey()) {             //less, go left
-    if (h -> getLeft() == NULL) return false;   //node not found, false
-    return search(h -> getLeft(), n);    //go left
+bool BST::search(Node* h, int n) {//Private search function
+  if (!h){//If tree is empty
+    return false;
+    //Return false
   }
-  else {                                 //greater, go right
-    if (h -> getRight() == NULL) return false;  //node not found, false
-    return search(h -> getRight(), n);   //go right
+  if (h->getKey() == n){//Key matches
+    return true;
+  }
+  if (n < h->getKey()){//If less, go left
+    if (h->getLeft() == NULL){//If node not found
+      return false;
+      //Return false
+    }
+    return search(h->getLeft(), n);
+    //Go left
+  }
+  else {//If greater, go right
+    if (h->getRight() == NULL){//Node not found
+      return false;
+      //Return false
+    }
+    return search(h->getRight(), n);
+    //Go right
   }
 }
 
-//destructor
-BST::~BST() { //Repeatedly call delete on head until tree is gone
-  while (head) { //Delete tree
+BST::~BST() {//Destructor
+  while (head) {//Repeatedly call delete on head until the tree is gone
     deleteNode(head, head -> getKey());
+    //Delete head
   }
 }
