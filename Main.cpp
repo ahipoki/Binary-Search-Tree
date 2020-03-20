@@ -126,3 +126,17 @@ void Insert(BST* bst){
   cin.ignore(999, '\n');
   bst->Insert(key);
 }
+
+void search(BST* bst){
+  int key;
+  cout<<"What number do you want to search the tree for?"<<endl;
+  cin>>key;
+  cin.clear();
+  cin.ignore(999, '\n');
+  if (bst->search(key)){
+    cout<<n<<" is in the tree"<<endl;
+  }
+  else{
+    cout<<n<<" is not in the tree"<<endl;
+  }
+}
