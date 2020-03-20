@@ -1,22 +1,26 @@
 #ifndef BST_H
 #define BST_H
-#include <iostream>
-#include <cstring>
+#include "Node.h"
 
-using namespace std;
-
-class BST{
-  public:
-    BST();
-    void Insert(int);
-    void PrintTreeInOrder();
-    bool Search(int);
-    void Delete(int);
-    ~BST();
-  private:
-    int Key;
-    Node* Left;
-    Node* Right;
-    Node* Parent;
+class BST {
+ public:
+  BST();
+  //Constructor
+  void Insert(int);
+  //Insert a node
+  void deleteNode(int);
+  //Delete a node
+  void PrintTreeInOrder();
+  //Print the tree
+  bool search(int);
+  //Search the tree
+  ~BST();
+  //Destructor
+ private:
+  void Insert(Node*&, int);
+  bool deleteNode(Node*&, int);
+  void PrintTreeInOrder(Node*, int);
+  bool search(Node*, int);
+  Node* head;
 };
 #endif
