@@ -4,22 +4,40 @@
 
 using namespace std;
 
+BST::BST(){
+  head = NULL;
+}
+
+void BST::Insert(int node){
+  Insert(head, node);
+  cout<<"You added a node"<<endl;
+}
+
 Node* BST::Insert(Node* node, int key){
   if (node == NULL){
-    node = new Node;
-    node->Key = key;
-    node->Left = NULL;
-    node->Right = NULL;
-    node->Parent = NULL;
+    node = new Node(key);
+    return;
   }
-  else if (node->Key->Right = Insert(node->Right, key)){
-    node->Right->Parent = node;
+  else if (key < node->getKey()){
+    if (node->getLeft() == NULL){
+      node->setLeft(new Node(key));
+      node->getLeft()->setParent(node);
+      return;
+    }
+    Node* Left = node->getLeft();
+    Insert(Left, key);
+    return;
   }
   else{
-    node->Left = Insert(node->Left, key);
-    node->Left->Parent = node;
+    if (node->getRight() == NULL){
+      node->setRight(new Node(key));
+      node->getRight()->setParent(node);
+      return;
+    }
+    Node* Right = node->getRight();
+    Insert(Right, key);
+    return;
   }
-  return node;
 }
 
 void BST::PrintTreeInOrder(Node* node){
