@@ -8,7 +8,7 @@ using namespace std;
 
 class Node{
   public:
-   Node();
+   Node(int);
    ~Node();
    void setKey(int);
    int getKey();
@@ -16,10 +16,10 @@ class Node{
    Node* getLeft();
    void setRight(Node*);
    Node* getRight();
+  private:
    int Key;
    Node* Right;
    Node* Left;
    Node* Parent;
-  private:
 };
 #endif
