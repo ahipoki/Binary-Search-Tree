@@ -222,3 +222,4 @@ BST::~BST() { //Repeatedly call delete on head until tree is gone
   while (head){ //Delete tree
     deleteNode(head, head->getKey());
   }
+}
