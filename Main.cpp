@@ -15,9 +15,9 @@ void heapDown(int[], int, int);
 
 int main()
 {
+  BST* bst = new BST();
   char input[80];
   char line[100];
-  //int size = sizeof(line)/sizeof(line[0]);
   int size = 0;
   int counter = 0;
   //int lineCounter = 0;
@@ -86,7 +86,7 @@ int main()
       cin>>numAdd;
       cin.clear();
       cin.ignore(999, '\n');
-      cout<<"You want to add: "<<numAdd<<endl;
+      bst->Insert(numAdd);
     }
     else if (strcmp(move, "REMOVE") == 0){
       int numRemove = 0;
@@ -94,7 +94,7 @@ int main()
       cin>>numRemove;
       cin.clear();
       cin.ignore(999, '\n');
-      cout<<"You want to remove: "<<numRemove<<endl;
+      bst->deleteNode(numRemove);
     }
     else if (strcmp(move, "PRINT") == 0){
       cout<<"Visual Representation:"<<endl;
@@ -109,7 +109,12 @@ int main()
       cin>>numSearch;
       cin.clear();
       cin.ignore(999, '\n');
-      cout<<"You want to search for: "<<numSearch<<endl;
+      if (bst->search(numSearch)){
+	      cout<<numSearch<<" is in the tree"<<endl;
+      }
+      else{
+        cout<<numSearch<<" is not in the tree"<<endl;
+      }
     }
     else if (strcmp(move, "STOP") == 0){
       running = false;
@@ -118,7 +123,7 @@ int main()
       cout<<"That's an invalid option"<<endl;
     }
   }
-  return 0;
+  delete bst;
 }
 
 void strupper(char* str){
