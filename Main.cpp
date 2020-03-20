@@ -127,6 +127,15 @@ void Insert(BST* bst){
   bst->Insert(key);
 }
 
+void deleteNode(BST* bst){
+  int key;
+  cout<<"What number do you want to remove from the tree?"<<endl;
+  cin>>key;
+  cin.clear();
+  cin.ignore(999, '\n');
+  bst->deleteNode(key);
+}
+
 void search(BST* bst){
   int key;
   cout<<"What number do you want to search the tree for?"<<endl;
@@ -140,3 +149,4 @@ void search(BST* bst){
     cout<<n<<" is not in the tree"<<endl;
   }
 }
+
