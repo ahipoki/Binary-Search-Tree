@@ -4,6 +4,7 @@
 #include <cmath>
 #include <cstdlib>
 #include "Node.h"
+#include "BST.h"
 
 using namespace std;
 
@@ -91,11 +92,7 @@ int main()
       bst->deleteNode(numRemove);
     }
     else if (strcmp(move, "PRINT") == 0){
-      cout<<"Visual Representation:"<<endl;
-      printTree(heap, len, 0, 0);
-      cout<<"Max to min:"<<endl;
-      sort(heap, len);
-      cout<<endl;
+        print(bst);
     }
     else if (strcmp(move, "SEARCH") == 0){
       int numSearch = 0;
@@ -168,9 +165,9 @@ void search(BST* bst){
   cin.clear();
   cin.ignore(999, '\n');
   if (bst->search(key)){
-    cout<<n<<" is in the tree"<<endl;
+    cout<<key<<" is in the tree"<<endl;
   }
   else{
-    cout<<n<<" is not in the tree"<<endl;
+    cout<<key<<" is not in the tree"<<endl;
   }
 }
