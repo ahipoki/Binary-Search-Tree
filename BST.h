@@ -2,7 +2,7 @@
 #define BST_H
 #include "Node.h"
 
-class BST {
+class BST{
  public:
   BST();
   //Constructor
