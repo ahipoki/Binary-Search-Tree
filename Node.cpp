@@ -35,7 +35,7 @@ Node* Node::getRight(){
   return Right;
 }
 
-Node* Node::setParent(Node* parent){
+void Node::setParent(Node* parent){
   Parent = parent;
 }
 
