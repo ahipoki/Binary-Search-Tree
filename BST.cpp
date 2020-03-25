@@ -16,7 +16,7 @@ void BST::Insert(int n){//Public insert function
 
 void BST::Insert(Node* &h, int key){//Private insert function
   if (h == NULL){//If head is null
-    head = new Node(n);
+    head = new Node(key);
     //BST was empty & new head
     return;
   }
